@@ -3,13 +3,15 @@ const router = express.Router()
 
 const { controllerWrapper, validator } = require('../../middelwares')
 const { contacts: ctrl } = require('../../controllers')
-const { contactsSchema } = require('../../schemas')
+const { joiSchema } = require('../../schemas/contacts')
+
 
 router.get('/', controllerWrapper(ctrl.listContacts))
 router.get('/:contactId', controllerWrapper(ctrl.getById))
-router.post('/', validator(contactsSchema), controllerWrapper(ctrl.add))
+router.post('/', validator(joiSchema), controllerWrapper(ctrl.add))
 router.delete('/:contactId', controllerWrapper(ctrl.removeById))
-router.put('/:contactId', validator(contactsSchema), controllerWrapper(ctrl.updateById))
+router.put('/:contactId', validator(joiSchema), controllerWrapper(ctrl.updateById))
+router.patch('/:contactId/favorite', controllerWrapper(ctrl.updateStatusContactById))
 
 
 module.exports = router

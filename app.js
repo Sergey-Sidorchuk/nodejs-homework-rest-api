@@ -1,26 +1,14 @@
 const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
-const mongoose = require('mongoose')
+
 
 
 const contactsRouter = require('./routes/api/contacts')
-const { error } = require('./schemas/contacts')
-const { DB_HOST } = require('./config')
- 
-mongoose.connect(DB_HOST, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('Database connection successful');
-})
-  .catch(error => {
-    console.log(error.message);
-  })
-
 
 
 const app = express()
+
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
 app.use(logger(formatsLogger))
@@ -39,7 +27,3 @@ app.use((err, req, res, next) => {
 })
 
 module.exports = app
-
-
-
-// 
