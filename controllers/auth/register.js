@@ -1,5 +1,6 @@
 const { Conflict } = require("http-errors");
 const { User } = require("../../schemas");
+const gravatar = require("gravatar");
 
 const register = async (req, res) => {
   if (req.body.email === null || req.body.password === null) {
@@ -15,7 +16,9 @@ const register = async (req, res) => {
   if (user) {
     throw new Conflict("Email in use");
   }
-  const newUser = new User({ email });
+
+  const avatarURL = gravatar.url(email);
+  const newUser = new User({ email, avatarURL });
   newUser.setPassword(password);
   const result = await newUser.save();
 
