@@ -17,16 +17,26 @@ const current = async (req, res, next) => {
         subscription: user.subscription,
       },
     });
-
-    // Status: 200 OK
-    // Content-Type: application/json
-    // ResponseBody: {
-    //   "email": "example@example.com",
-    //   "subscription": "starter"
-    // }
   } catch (error) {
     next(error);
   }
 };
 
 module.exports = current;
+
+// const { User } = require('../../schemas')
+
+// const current = async (req, res, _) => {
+//   const [{ _id: id, email, subscription }] = await User.find(req.user)
+//   res.json({
+//     status: 'success',
+//     code: 200,
+//     data: {
+//       id,
+//       email,
+//       subscription
+//     }
+//   })
+// }
+
+// module.exports = current
