@@ -1,12 +1,8 @@
-const express = require("express");
-const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
-const fs = require("fs/promises");
 
-const tempDir = path.join(__dirname, "../", "temp");
-
-const uploadConfig = multer.diskStorage({
+const tempDir = path.join(__dirname, "../", "tmp");
+const multerConfig = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, tempDir);
   },
@@ -19,7 +15,7 @@ const uploadConfig = multer.diskStorage({
 });
 
 const upload = multer({
-  storage: uploadConfig,
+  storage: multerConfig,
 });
 
 module.exports = upload;

@@ -1,4 +1,5 @@
 const express = require("express");
+const router = express.Router();
 
 const {
   controllerWrapper,
@@ -6,8 +7,6 @@ const {
   upload,
 } = require("../../middelwares");
 const { users: ctrl } = require("../../controllers");
-
-const router = express.Router();
 
 router.patch(
   "/avatars",

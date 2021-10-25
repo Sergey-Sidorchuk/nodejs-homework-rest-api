@@ -1,4 +1,5 @@
-const { getNodeText } = require("@testing-library/dom");
+const path = require("path");
+const fs = require("fs/promises");
 const { User } = require("../../schemas");
 
 const updateAvatar = async (req, res) => {
@@ -12,13 +13,13 @@ const updateAvatar = async (req, res) => {
     const image = path.join("avatars", filename);
     await User.findByIdAndUpdate(_id, { avatarURL: image });
     res.json({
-      status: "succes",
+      status: "success",
       code: 201,
       message: "Update avatar success",
     });
   } catch (error) {
     await fs.unlink(tempDir);
-    getNodeText(error);
+    next(error);
   }
 };
 
