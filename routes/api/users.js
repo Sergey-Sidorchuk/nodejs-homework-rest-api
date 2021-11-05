@@ -8,6 +8,8 @@ const {
 } = require("../../middelwares");
 const { users: ctrl } = require("../../controllers");
 
+router.get("verify/:verificationToken", controllerWrapper(ctrl.verify));
+
 router.patch(
   "/avatars",
   authenticate,
